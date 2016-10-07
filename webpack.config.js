@@ -18,7 +18,7 @@ const cfg = WebpackMerge({
     },
     resolve: {
         root: cfgBase.paths.source,
-        extensions: ['', '.js']
+        extensions: ['', '.js', '.ts', '.tsx']
     },
     plugins: [
         new Webpack.NoErrorsPlugin(),
@@ -31,10 +31,13 @@ const cfg = WebpackMerge({
         new HtmlWebpackPlugin({
             title: cfgBase.pkg.name,
             template: 'index.html',
-            favicon: 'assets/img/favicon.ico',
             hash: true
         })
     ],
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    },
     eslint: {
         configFile: 'configs/eslint/.eslintrc',
         ignoreFile: 'configs/eslint/.eslintignore'

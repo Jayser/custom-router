@@ -16,9 +16,19 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'eslint',
                 include: [cfgBase.paths.source]
+            },
+            {
+                test: /\.js$/,
+                loader: "source-map-loader",
+                include: [cfgBase.paths.source]
             }
         ],
         loaders: [
+            {
+                test: /\.ts(x?)$/,
+                include: [cfgBase.paths.source],
+                loader: "ts"
+            },
             {
                 test: /\.js$/,
                 include: [cfgBase.paths.source],
