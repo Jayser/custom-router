@@ -1,0 +1,10 @@
+# Build
+reports/
+build/
+
+# Editors
+.idea/
+
+# Node
+node_modules/
+npm-debug.log

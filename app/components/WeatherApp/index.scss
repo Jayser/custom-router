@@ -1,0 +1,75 @@
+.weather-app {
+  font-family: Poppins, Arial;
+  border: 1px solid #d4d3d3;
+  border-radius: 3px;
+  width: 480px;
+  margin: 0 auto;
+  box-shadow: 0 0 15px 5px rgba(0,0,0,.2);
+  background: #F8F8F8;
+  color: #222;
+  height: 680px;
+  position: relative;
+
+  &__header {
+    background: #5591DF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+    border-radius: 3px 3px 0 0;
+  }
+
+  &__logo {
+    padding: 0 5px;
+  }
+  
+  &__search {
+    width: 100%;
+    margin: 0 5px;
+    $inppadd: 10px;
+  }
+
+  &__content {
+    box-sizing: border-box;
+    overflow: auto;
+    height: 583px;
+  }
+
+  &__actions {
+    order: 3;
+    display: inline-flex;
+
+    &-clear{
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+
+  &__period {
+    display: inline-block;
+    color: #fff;
+    width: 32px;
+    text-align: right;
+  }
+  &__degrees {
+    margin-left: 10px;
+    display: inline-block;
+    color: #fff;
+  }
+
+  &__footer {
+    border-radius: 0 0 3px 3px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 3%;
+    height: 7%;
+    border: 1px solid #222;
+    background-image: linear-gradient(to bottom, #444444, #222222);
+    box-shadow: inset 0 1px 0 #7d7d7d;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+}
