@@ -45,7 +45,8 @@ feature-36: your own commit message
 
 ## Style Guide
 
- coming soon
+* [Style Guide](https://github.com/airbnb/javascript/tree/master/react)
+* [Best Practice](https://github.com/planningcenter/react-patterns)
  
 ## API
 
