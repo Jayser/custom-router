@@ -78,7 +78,7 @@
       updateContent(data);
 
       // Add an item to the history log
-      history.pushState(data, event.target.textContent, event.target.href);
+      history._addRoute(data, event.target.textContent, event.target.href);
 
       return event.preventDefault();
     }
