@@ -34,10 +34,6 @@ const cfg = WebpackMerge({
             hash: true
         })
     ],
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
     eslint: {
         configFile: 'configs/eslint/.eslintrc',
         ignoreFile: 'configs/eslint/.eslintignore'
