@@ -22,6 +22,7 @@ class Router {
         this._addHandleOnPopState();
     }
 
+    //start listening for history change
     _addHandleOnPopState() {
         addEventListener('popstate', ({ state = {} }) => this.go(state.url), false);
     }
@@ -38,7 +39,7 @@ class Router {
         return new RegExp(`^${url.replace(/:\w+/g, '(\\w+)')}$`);
     }
 
-    _addRoute({ handle, pattern }, url) {
+    _pushState({ handle, pattern }, url) {
         let result = false;
         const args = this._match(url, pattern);
 
@@ -60,14 +61,31 @@ class Router {
         }
     }
 
+    remove(url) {
+        if ((this._isString(url) || this._isRegExp(url))) {
+            const pattern = this._isRegExp(url) ? url : this._toPattern(url);
+            const idx = this._routers.findIndex(route => String(route.pattern) === String(pattern));
+
+            this._routers = this._routers.splice(idx, 1);
+        }
+    }
+
     go(url) {
         const route = this._findRoute(url);
 
         if(route) {
-            return this._addRoute(route, url);
+            return this._pushState(route, url);
         }
 
         this._notFound && this._notFound();
+    }
+
+    removeAllRoutes() {
+        this._routers = [];
+    }
+
+    routed() {
+        return this._routers;
     }
 
     parse(url) {
@@ -85,5 +103,12 @@ class Router {
     }
 
 }
+
+// allows add more than one handle
+// allows add local path
+// checked nested
+// after before middleware
+// thinking about functionality way
+// TypeScript
 
 export default new Router();

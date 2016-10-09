@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import router from './utils/router';
 
-console.log(router);
+
 window.router = router;
 
 /* this.add('/gallery1/:tag/:perPage/page/:page/', function () {
@@ -24,10 +24,16 @@ router.add('/gallery/:id', function (data) {
     console.log('>>> /gallery/' + data[0]);
 });
 
-router.go('/gallery');
+console.log(router);
+
+router.remove('/gallery');
+
+console.log(router);
+
+/*router.go('/gallery');
 router.go('/gallery/id1');
-router.go('/gallery/id2');
-router.back();
+/*router.go('/gallery/id2');*/
+//router.back();
 //router.go('/notFound');
 /*router.notFound(() => {
     console.log('Not Found');
