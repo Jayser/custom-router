@@ -66,8 +66,6 @@ class Router {
             const idx = this._findRouteIndex(pattern);
             const hasRoute = idx !== -1;
 
-            debugger;
-
             if (hasRoute) {
                 this._routers[idx].handles.push(handle);
             }

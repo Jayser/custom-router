@@ -4,8 +4,54 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.favicon %>">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+        main,
+        header,
+        footer {
+            border: 1px solid #ccc;
+            padding: 20px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .left {
+            text-align: center;
+            float: left;
+        }
+        .right {
+            text-align: center;
+            float: right;
+        }
+
+        .navigation {
+            text-decoration: none;
+            background: red;
+            color: #fff;
+            text-transform: uppercase;
+            padding: 3px 5px;
+        }
+    </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <header id="header">
+            header
+        </header>
+        <main id="main">
+            <div class="left" id="left">
+                left
+            </div>
+            <div class="right" id="right">
+                right
+            </div>
+            <div id="center"></div>
+        </main>
+        <footer id="footer">
+            <a href="/page/1" class="navigation">page 1</a>
+            <a href="/page/2" class="navigation">page 2</a>
+            |
+            <a href="/slider/1" class="navigation">slider 1</a>
+            <a href="/slider/2" class="navigation">slider 2</a>
+        </footer>
+    </div>
 </body>
 </html>
