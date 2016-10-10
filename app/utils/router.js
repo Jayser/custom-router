@@ -1,3 +1,5 @@
+const REMOVE_ONE = 1;
+
 class Router {
     constructor() {
         this._routers = [];
@@ -31,6 +33,12 @@ class Router {
         return str.match(regexp);
     }
 
+    _findRouteIndex(url) {
+        return this._routers.findIndex(({ pattern }) => {
+            return this._isRegExp(url) ? String(pattern) === String(url) : this._match(url, pattern);
+        });
+    }
+
     _findRoute(url) {
         return this._routers.find(({ pattern }) => this._match(url, pattern));
     }
@@ -39,34 +47,39 @@ class Router {
         return new RegExp(`^${url.replace(/:\w+/g, '(\\w+)')}$`);
     }
 
-    _pushState({ handle, pattern }, url) {
-        let result = false;
+    _pushState({ handles, pattern }, url) {
         const args = this._match(url, pattern);
+        const parsedRouterArgs = args && args.slice(1);
 
-        if (this._isFunction(handle)) {
-            history.pushState({ pattern }, null, url);
-            handle(args && args.slice(1));
-            result = true;
-        }
+        history.pushState({ pattern }, null, url);
+        handles.forEach(handle => handle(parsedRouterArgs));
+    }
 
-        return result;
+    _getUrl(url) {
+        return this._isRegExp(url) ? url : this._toPattern(url)
     }
 
     // Public
     add(url, handle) {
         if ((this._isString(url) || this._isRegExp(url)) && this._isFunction(handle)) {
-            const pattern = this._isRegExp(url) ? url : this._toPattern(url);
+            const pattern = this._getUrl(url);
+            const idx = this._findRouteIndex(pattern);
+            const hasRoute = idx !== -1;
 
-            this._routers.push({ pattern, handle });
+            debugger;
+
+            if (hasRoute) {
+                this._routers[idx].handles.push(handle);
+            }
+
+            this._routers.push({ pattern, handles: [handle] });
         }
     }
 
     remove(url) {
         if ((this._isString(url) || this._isRegExp(url))) {
-            const pattern = this._isRegExp(url) ? url : this._toPattern(url);
-            const idx = this._routers.findIndex(route => String(route.pattern) === String(pattern));
-
-            this._routers = this._routers.splice(idx, 1);
+            const idx = this._findRouteIndex(url);
+            this._routers = this._routers.splice(idx, REMOVE_ONE);
         }
     }
 
@@ -101,13 +114,10 @@ class Router {
     notFound(fn) {
         this._notFound = fn;
     }
-
 }
 
-// allows add more than one handle
-// allows add local path
-// checked nested
 // after before middleware
+// allows add local path
 // thinking about functionality way
 // TypeScript
 
