@@ -15,10 +15,6 @@ router.add('/page/:num', (num) => {
     document.getElementById('center').innerHTML = 'page ' + num;
 });
 
-router.add('/page/:num/slider/:slide', (num) => {
-    document.getElementById('center').innerHTML = 'page ' + num;
-});
-
 router.go('/');
 
 

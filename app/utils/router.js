@@ -66,11 +66,12 @@ class Router {
             const idx = this._findRouteIndex(pattern);
             const hasRoute = idx !== -1;
 
-            if (hasRoute) {
-                this._routers[idx].handles.push(handle);
+            if (!hasRoute) {
+                this._routers.push({ pattern, handles: [handle] });
+                return;
             }
 
-            this._routers.push({ pattern, handles: [handle] });
+            this._routers[idx].handles.push(handle);
         }
     }
 
